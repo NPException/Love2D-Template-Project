@@ -2,6 +2,9 @@
 require("lib.stringfunctions")
 require("loop")
 
+local splash = require("lib.o-ten-one")({background={0, 0, 0}})
+splash.onDone = function() splash = nil end
+
 GLOBALS = { debug = false }
 local globals = GLOBALS
 
@@ -23,6 +26,8 @@ end
 
 -- KEYPRESSED --
 function love.keypressed( key, scancode, isrepeat )
+  if splash then splash:skip() return end
+  
   if (key == "pause") then
     globals.debug = not globals.debug
   elseif (scancode == "`") then
@@ -53,6 +58,8 @@ end
 
 -- UPDATE --
 function love.update(dt)
+  if splash then splash:update(dt) return end
+  
   globals.time = globals.time + dt
   
   -- do game state update here
@@ -67,6 +74,8 @@ end
 
 -- DRAW --
 function love.draw()
+  if splash then splash:draw() return end
+  
   -- do game state draw here
   
   if (globals.debug) then
