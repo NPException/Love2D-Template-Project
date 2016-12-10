@@ -23,7 +23,7 @@ end
 
 -- KEYPRESSED --
 function love.keypressed( key, scancode, isrepeat )
-  if (key == "kp+") then
+  if (key == "pause") then
     globals.debug = not globals.debug
   elseif (scancode == "`") then
     debug.debug()
